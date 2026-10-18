@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CH&amp;D Rental Pro API</title>
+    <style>
+        :root { --azul:#0b3d91; --gris:#f3f5f9; --borde:#d9dee8; }
+        * { box-sizing: border-box; }
+        body { margin:0; font-family: Arial, Helvetica, sans-serif; background: var(--gris); color:#1d2433; }
+        header { background: var(--azul); color:#fff; padding: 20px 16px; }
+        header h1 { margin:0; font-size: 22px; }
+        header p { margin:4px 0 0; opacity:.85; font-size:14px; }
+        main { max-width: 960px; margin: 0 auto; padding: 16px; }
+        .card { background:#fff; border:1px solid var(--borde); border-radius:8px; padding:16px; margin-bottom:16px; }
+        h2 { font-size:17px; margin:0 0 12px; color: var(--azul); }
+        a.btn, button { display:inline-block; background: var(--azul); color:#fff; border:0; border-radius:6px;
+            padding:9px 14px; font-size:14px; text-decoration:none; cursor:pointer; }
+        a.sec { background:#fff; color: var(--azul); border:1px solid var(--azul); }
+        input { width:100%; padding:8px; border:1px solid var(--borde); border-radius:6px; font-size:14px; margin:4px 0 10px; }
+        .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+        table { width:100%; border-collapse: collapse; font-size:13px; }
+        th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--borde); }
+        th { background: var(--gris); }
+        code { background: var(--gris); padding: 1px 5px; border-radius:4px; }
+        #msg { font-size:13px; margin-top:8px; }
+        .ok { color:#11763a; } .err { color:#b42318; }
+        .tabla { overflow-x:auto; }
+    </style>
+</head>
+<body>
+<header>
+    <h1>CH&amp;D RENTAL PRO &mdash; Servicios Web REST</h1>
+    <p>GRUPO CH&amp;D CONTRATISTAS S.A.C. &middot; Spring Boot 3 &middot; Spring Security + JWT + BCrypt &middot; PostgreSQL</p>
+</header>
+<main>
+    <div class="card">
+        <h2>Documentacion y monitoreo</h2>
+        <a class="btn" href="swagger-ui.html">Abrir Swagger UI</a>
+        <a class="btn sec" href="v3/api-docs">OpenAPI JSON</a>
+        <a class="btn sec" href="actuator/health">Health check</a>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h2>Probar el servicio de login</h2>
+            <label>Email<input id="email" value="admin@chdrental.com"></label>
+            <label>Contrasena<input id="password" type="password" placeholder="Contrasena"></label>
+            <button id="btnLogin">POST /api/auth/login</button>
+            <div id="msg"></div>
+        </div>
+        <div class="card">
+            <h2>Servicios disponibles</h2>
+            <table>
+                <tr><th>Metodo</th><th>Ruta</th></tr>
+                <tr><td>POST</td><td><code>/api/auth/login</code></td></tr>
+                <tr><td>GET</td><td><code>/api/{recurso}</code>, <code>/api/{recurso}/{id}</code></td></tr>
+                <tr><td>POST</td><td><code>/api/{recurso}</code></td></tr>
+                <tr><td>PUT</td><td><code>/api/{recurso}/{id}</code></td></tr>
+                <tr><td>DELETE</td><td><code>/api/{recurso}/{id}</code></td></tr>
+            </table>
+            <p style="font-size:13px">Recursos: clientes, vehiculos, contratos, pagos, mantenimientos, usuarios.</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>GET /api/vehiculos (requiere token)</h2>
+        <div class="tabla"><table id="tabla"><tr><td>Inicie sesion para consultar la flota.</td></tr></table></div>
+    </div>
+</main>
+<script>
+    const msg = document.getElementById('msg');
+    document.getElementById('btnLogin').addEventListener('click', async () => {
+        msg.textContent = 'Enviando...'; msg.className = '';
+        try {
+            const r = await fetch('api/auth/login', {
+                method: 'POST', headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({email: email.value, password: password.value})
+            });
+            const data = await r.json();
+            if (!r.ok) { msg.textContent = r.status + ' - ' + (data.mensaje || 'Error'); msg.className = 'err'; return; }
+            msg.textContent = '200 OK - Bienvenido(a) ' + data.usuario.nombreCompleto + ' (' + data.usuario.rol + ')';
+            msg.className = 'ok';
+            const v = await fetch('api/vehiculos', {headers: {'Authorization': 'Bearer ' + data.token}}).then(x => x.json());
+            const t = document.getElementById('tabla');
+            t.innerHTML = '<tr><th>Placa</th><th>Marca</th><th>Modelo</th><th>Km</th><th>Tarifa (S/)</th><th>Estado</th></tr>';
+            v.forEach(x => {
+                const tr = document.createElement('tr');
+                [x.placa, x.marca, x.modelo, x.kilometraje, x.tarifaDiaria, x.estado].forEach(c => {
+                    const td = document.createElement('td'); td.textContent = c; tr.appendChild(td);
+                });
+                t.appendChild(tr);
+            });
+        } catch (e) { msg.textContent = 'Error de red: ' + e.message; msg.className = 'err'; }
+    });
+</script>
+</body>
+</html>

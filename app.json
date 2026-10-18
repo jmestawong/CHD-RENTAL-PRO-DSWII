@@ -1,0 +1,13 @@
+{
+  "name": "CH&D Rental Pro API",
+  "description": "Servicios web REST (Spring Boot + PostgreSQL) para la gestion de alquiler de camionetas 4x4",
+  "repository": "https://github.com/jmestawong/CHD-RENTAL-PRO-DSWII",
+  "keywords": ["java", "spring-boot", "postgresql", "rest", "jwt"],
+  "stack": "heroku-24",
+  "buildpacks": [{ "url": "heroku/java" }],
+  "addons": [{ "plan": "heroku-postgresql:essential-0" }],
+  "env": {
+    "JWT_SECRET": { "description": "Clave Base64 para firmar los JWT", "generator": "secret" },
+    "ADMIN_PASSWORD": { "description": "Contrasena inicial del usuario admin@chdrental.com", "required": true }
+  }
+}
