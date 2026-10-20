@@ -23,7 +23,6 @@ public class UsuarioRequest {
     @Size(max = 100)
     private String email;
 
-    /** Obligatoria al crear; opcional al actualizar (si se envia, se vuelve a cifrar con BCrypt). */
     @Size(min = 8, max = 60, message = "La contrasena debe tener entre 8 y 60 caracteres")
     private String password;
 

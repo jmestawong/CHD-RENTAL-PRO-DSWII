@@ -6,7 +6,7 @@ import com.chd.rental.entity.enums.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-/** Fabrica de entidades para las pruebas de la capa de acceso a datos. */
+// Metodos de apoyo para crear entidades de prueba sin repetir codigo en cada test
 final class DatosPrueba {
 
     private DatosPrueba() {

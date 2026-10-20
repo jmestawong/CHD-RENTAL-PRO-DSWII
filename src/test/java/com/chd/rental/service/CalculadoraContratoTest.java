@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// Pruebas del calculo de dias, subtotal, IGV y total del contrato
 @DisplayName("CalculadoraContrato - reglas de calculo")
 class CalculadoraContratoTest {
 

@@ -10,10 +10,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-/**
- * Datos de entrada del contrato. La tarifa, dias, subtotal, IGV y total
- * se calculan en el servidor; no se aceptan desde el cliente.
- */
+// No se recibe tarifa, subtotal, IGV ni total: esos datos los calcula el servidor
 @Data
 @Builder
 @NoArgsConstructor

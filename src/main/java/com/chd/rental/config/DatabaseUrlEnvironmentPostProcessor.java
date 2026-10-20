@@ -9,12 +9,8 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Heroku y Render publican la base de datos como
- * {@code DATABASE_URL=postgres://usuario:clave@host:puerto/bd}.
- * Este procesador la convierte a las propiedades JDBC de Spring
- * cuando no se definio explicitamente JDBC_DATABASE_URL.
- */
+// Render entrega la conexion como DATABASE_URL=postgres://usuario:clave@host:puerto/bd.
+// Aqui se convierte a la URL JDBC que necesita Spring (en Heroku no hace falta).
 public class DatabaseUrlEnvironmentPostProcessor implements EnvironmentPostProcessor {
 
     @Override

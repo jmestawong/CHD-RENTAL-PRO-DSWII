@@ -29,11 +29,13 @@ public class AuthServiceImpl implements AuthService {
     private final UsuarioRepository usuarioRepository;
     private final JwtService jwtService;
 
+    // Login: valida email y contrasena contra la BD, registra la ultima conexion
+    // y devuelve el token con los datos basicos del usuario (sin el password)
     @Override
     @Transactional
     public LoginResponse login(LoginRequest request) {
         String email = request.getEmail().trim().toLowerCase();
-        // Lanza BadCredentialsException / DisabledException si falla (BCrypt.matches)
+        // si la clave no coincide con el hash BCrypt lanza BadCredentialsException (401)
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, request.getPassword()));
 
         Usuario usuario = usuarioRepository.findByEmailIgnoreCase(email)

@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// Pruebas de usuarios; tambien se comprueba que el password quede guardado como hash BCrypt
 @DataJpaTest
 @DisplayName("UsuarioRepository - capa de acceso a datos")
 class UsuarioRepositoryTest {

@@ -27,10 +27,8 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Proceso de negocio principal: registro del contrato de alquiler.
- * Cada operacion es transaccional: contrato y estado del vehiculo se actualizan juntos.
- */
+// Logica principal del negocio. Cada metodo es transaccional para que el contrato
+// y el estado del vehiculo se guarden juntos; si algo falla no se guarda nada.
 @Service
 @RequiredArgsConstructor
 public class ContratoServiceImpl implements ContratoService {
@@ -59,6 +57,8 @@ public class ContratoServiceImpl implements ContratoService {
         return ContratoResponse.from(buscar(id));
     }
 
+    // Al crear se valida el cliente, el vehiculo y que no haya cruce de fechas.
+    // Los importes los calcula el servidor con la tarifa del vehiculo.
     @Override
     @Transactional
     public ContratoResponse crear(ContratoRequest req) {
@@ -81,6 +81,7 @@ public class ContratoServiceImpl implements ContratoService {
         copiarYCalcular(req, c, vehiculo.getTarifaDiaria());
 
         c = contratoRepository.save(c);
+        // el numero se arma con el id para que no se repita (CTR-000001, CTR-000002...)
         c.setNumeroContrato(String.format("CTR-%06d", c.getId()));
 
         if (estado == EstadoContrato.ACTIVO) {
@@ -89,6 +90,8 @@ public class ContratoServiceImpl implements ContratoService {
         return ContratoResponse.from(c);
     }
 
+    // Un contrato FINALIZADO o CANCELADO ya no se modifica. Al finalizar se pide el
+    // kilometraje final y el vehiculo vuelve a quedar disponible.
     @Override
     @Transactional
     public ContratoResponse actualizar(Long id, ContratoRequest req) {
@@ -131,6 +134,7 @@ public class ContratoServiceImpl implements ContratoService {
         return ContratoResponse.from(c);
     }
 
+    // Si el contrato ya tiene pagos no se elimina, en ese caso se debe cancelar
     @Override
     @Transactional
     public void eliminar(Long id) {
@@ -144,8 +148,6 @@ public class ContratoServiceImpl implements ContratoService {
         contratoRepository.flush();
         liberarSiCorresponde(vehiculo);
     }
-
-    // ---------------------------------------------------------------- reglas
 
     private void validarFechasYCruce(ContratoRequest req, Long idVehiculo, Long excluirId) {
         if (req.getFechaFin().isBefore(req.getFechaInicio())) {
@@ -182,7 +184,7 @@ public class ContratoServiceImpl implements ContratoService {
         }
     }
 
-    /** Pasa el vehiculo a DISPONIBLE si estaba ALQUILADO y ya no tiene contratos activos. */
+    // El vehiculo vuelve a DISPONIBLE solo si ya no tiene otro contrato activo
     private void liberarSiCorresponde(Vehiculo vehiculo) {
         if (vehiculo.getEstado() == EstadoVehiculo.ALQUILADO
                 && !contratoRepository.existsByVehiculoIdAndEstado(vehiculo.getId(), EstadoContrato.ACTIVO)) {

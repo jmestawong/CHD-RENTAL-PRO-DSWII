@@ -16,7 +16,6 @@ public class LoginResponse {
     @Builder.Default
     private String tipo = "Bearer";
 
-    /** Vigencia del token en segundos. */
     private long expiraEn;
 
     private UsuarioResponse usuario;

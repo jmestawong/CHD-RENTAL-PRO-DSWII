@@ -20,10 +20,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-/**
- * Carga datos iniciales cuando la base esta vacia.
- * Las contrasenas se registran cifradas con BCrypt (nunca en texto plano).
- */
+// Al iniciar la aplicacion crea usuarios, clientes y vehiculos de ejemplo
+// solo si las tablas estan vacias. Las contrasenas se guardan con BCrypt.
 @Slf4j
 @Component
 @RequiredArgsConstructor

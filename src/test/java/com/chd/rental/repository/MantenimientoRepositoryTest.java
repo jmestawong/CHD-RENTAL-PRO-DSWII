@@ -15,6 +15,7 @@ import java.util.EnumSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// Pruebas de mantenimientos y de la consulta que verifica si un vehiculo tiene mantenimientos abiertos
 @DataJpaTest
 @DisplayName("MantenimientoRepository - capa de acceso a datos")
 class MantenimientoRepositoryTest {

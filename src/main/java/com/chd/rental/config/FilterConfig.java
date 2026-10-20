@@ -5,10 +5,8 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * Evita que el filtro JWT se registre dos veces (como filtro del contenedor y dentro
- * de la cadena de Spring Security). Solo debe ejecutarse dentro de Spring Security.
- */
+// El filtro JWT ya esta registrado dentro de Spring Security; con esto evitamos
+// que Spring Boot lo vuelva a registrar como filtro normal y se ejecute dos veces
 @Configuration
 public class FilterConfig {
 

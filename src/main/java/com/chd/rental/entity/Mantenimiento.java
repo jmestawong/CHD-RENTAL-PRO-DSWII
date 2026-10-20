@@ -9,9 +9,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/**
- * Mantenimiento preventivo o correctivo de un vehiculo.
- */
 @Entity
 @Table(name = "mantenimientos")
 @Getter

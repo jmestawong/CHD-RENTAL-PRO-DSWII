@@ -19,9 +19,8 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Traduce las excepciones a respuestas JSON homogeneas ({@link ApiError}).
- */
+// Convierte las excepciones en respuestas JSON con el mismo formato (ApiError)
+// para que el cliente siempre reciba el codigo HTTP y un mensaje claro
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {

@@ -10,10 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-/**
- * Carga el usuario desde la base de datos para Spring Security.
- * El password devuelto es el hash BCrypt almacenado.
- */
+// Spring Security usa esta clase para buscar al usuario por email en la tabla usuarios.
+// El password que devuelve es el hash BCrypt guardado en la base de datos.
 @Service
 @RequiredArgsConstructor
 public class UsuarioDetailsService implements UserDetailsService {

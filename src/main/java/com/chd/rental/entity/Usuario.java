@@ -7,9 +7,6 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-/**
- * Usuario interno del sistema. La contrasena se almacena cifrada con BCrypt.
- */
 @Entity
 @Table(name = "usuarios")
 @Getter
@@ -31,7 +28,7 @@ public class Usuario {
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    /** Hash BCrypt (60 caracteres). Nunca se guarda en texto plano. */
+    // aqui se guarda el hash BCrypt (60 caracteres), no la contrasena real
     @Column(nullable = false, length = 100)
     private String password;
 

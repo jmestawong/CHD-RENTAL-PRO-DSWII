@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-/** Representacion publica del usuario: nunca expone la contrasena. */
+// Lo que se devuelve del usuario; no incluye el password
 @Data
 @Builder
 @NoArgsConstructor

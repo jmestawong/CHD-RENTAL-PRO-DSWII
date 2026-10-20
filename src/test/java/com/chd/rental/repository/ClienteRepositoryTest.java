@@ -14,7 +14,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-/** Pruebas de la capa de acceso a datos: insertar, actualizar, eliminar y listar clientes. */
+// Pruebas de la capa de acceso a datos de clientes: insertar, actualizar, eliminar y listar.
+// @DataJpaTest usa una base H2 en memoria y deshace los cambios al terminar cada prueba.
 @DataJpaTest
 @DisplayName("ClienteRepository - capa de acceso a datos")
 class ClienteRepositoryTest {

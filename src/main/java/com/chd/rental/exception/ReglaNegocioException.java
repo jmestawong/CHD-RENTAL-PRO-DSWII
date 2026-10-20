@@ -3,10 +3,8 @@ package com.chd.rental.exception;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-/**
- * Violacion de una regla de negocio (duplicados, cruce de fechas, estados no permitidos).
- * Por defecto responde HTTP 409 Conflict.
- */
+// Se usa cuando no se cumple una regla del negocio (datos duplicados, cruce de fechas, etc.).
+// Por defecto devuelve 409 Conflict.
 @Getter
 public class ReglaNegocioException extends RuntimeException {
 

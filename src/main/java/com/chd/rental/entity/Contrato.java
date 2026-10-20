@@ -8,9 +8,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/**
- * Contrato de alquiler: vincula cliente, vehiculo y usuario que lo registra.
- */
 @Entity
 @Table(name = "contratos")
 @Getter

@@ -8,7 +8,6 @@ import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/** Documentacion interactiva de los servicios en /swagger-ui.html */
 @Configuration
 public class OpenApiConfig {
 

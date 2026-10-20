@@ -29,10 +29,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Configuracion de Spring Security:
- * API sin estado (JWT), contrasenas con BCrypt y permisos por rol.
- */
+// Configuracion de seguridad de la API. No se usan sesiones: cada peticion
+// debe traer el token JWT que se obtiene en /api/auth/login.
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -51,6 +49,7 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtFilter;
     private final ObjectMapper objectMapper;
 
+    // Las contrasenas se guardan y se comparan con BCrypt, nunca en texto plano
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -71,6 +70,8 @@ public class SecurityConfig {
                 .cors(c -> c.configurationSource(corsConfigurationSource()))
                 .headers(h -> h.frameOptions(f -> f.sameOrigin()))
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                // Permisos por rol: GERENCIA solo consulta, DELETE solo ADMIN
+                // y la gestion de usuarios tambien es exclusiva del ADMIN
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(RUTAS_PUBLICAS).permitAll()
                         .requestMatchers("/api/usuarios/**").hasRole("ADMIN")
@@ -81,6 +82,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/**").hasAnyRole(ROLES_ESCRITURA)
                         .requestMatchers(HttpMethod.GET, "/api/**").authenticated()
                         .anyRequest().authenticated())
+                // Si falta el token o el rol no alcanza, se responde en JSON igual que los demas errores
                 .exceptionHandling(e -> e
                         .authenticationEntryPoint((req, res, ex) ->
                                 escribirError(req, res, HttpStatus.UNAUTHORIZED,

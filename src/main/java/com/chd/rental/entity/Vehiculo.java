@@ -8,9 +8,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/**
- * Camioneta 4x4 de la flota.
- */
 @Entity
 @Table(name = "vehiculos")
 @Getter

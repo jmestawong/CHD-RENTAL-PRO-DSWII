@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// Pruebas de la capa de acceso a datos de vehiculos (insertar, actualizar, eliminar y listar)
 @DataJpaTest
 @DisplayName("VehiculoRepository - capa de acceso a datos")
 class VehiculoRepositoryTest {

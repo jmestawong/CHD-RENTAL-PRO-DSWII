@@ -1,4 +1,4 @@
-# Blueprint de Render (alternativa gratuita a Heroku): Web Service Docker + PostgreSQL
+# Render: servicio web (Docker) + base de datos PostgreSQL
 services:
   - type: web
     name: chd-rental-api

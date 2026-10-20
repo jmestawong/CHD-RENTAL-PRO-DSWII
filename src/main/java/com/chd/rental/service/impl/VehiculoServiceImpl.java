@@ -56,14 +56,12 @@ public class VehiculoServiceImpl implements VehiculoService {
         return vehiculoRepository.save(v);
     }
 
-    /**
-     * Actualiza datos operativos. Placa, marca y modelo identifican la unidad y
-     * no pueden modificarse despues del registro (observacion del docente).
-     */
     @Override
     @Transactional
     public Vehiculo actualizar(Long id, VehiculoRequest req) {
         Vehiculo v = obtener(id);
+        // placa, marca y modelo identifican la unidad, por eso no se pueden cambiar
+        // despues del registro (observacion del profesor en el ciclo anterior)
         if (!v.getPlaca().equalsIgnoreCase(req.getPlaca())
                 || !v.getMarca().equalsIgnoreCase(req.getMarca().trim())
                 || !v.getModelo().equalsIgnoreCase(req.getModelo().trim())) {
@@ -89,6 +87,7 @@ public class VehiculoServiceImpl implements VehiculoService {
         vehiculoRepository.delete(v);
     }
 
+    // El estado ALQUILADO lo maneja el modulo de contratos, no se cambia a mano desde aqui
     private void validarCambioEstado(Vehiculo v, EstadoVehiculo nuevo) {
         if (v.getEstado() == EstadoVehiculo.ALQUILADO && nuevo != EstadoVehiculo.ALQUILADO) {
             throw new ReglaNegocioException(

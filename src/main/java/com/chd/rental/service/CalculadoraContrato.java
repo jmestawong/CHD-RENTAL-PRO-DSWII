@@ -5,10 +5,8 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-/**
- * Reglas de calculo del contrato (dias, subtotal, IGV y total).
- * Se ejecuta siempre en el servidor para que el cliente no pueda alterar los importes.
- */
+// Calculo de importes del contrato: dias x tarifa = subtotal, IGV 18% y total.
+// Se separo en esta clase para poder probarla por separado (CalculadoraContratoTest).
 public final class CalculadoraContrato {
 
     public static final BigDecimal TASA_IGV = new BigDecimal("0.18");
@@ -16,7 +14,6 @@ public final class CalculadoraContrato {
     private CalculadoraContrato() {
     }
 
-    /** Dias de alquiler: diferencia entre fechas; un alquiler del mismo dia cuenta como 1 dia. */
     public static int calcularDias(LocalDate inicio, LocalDate fin) {
         long dias = ChronoUnit.DAYS.between(inicio, fin);
         return (int) Math.max(1, dias);

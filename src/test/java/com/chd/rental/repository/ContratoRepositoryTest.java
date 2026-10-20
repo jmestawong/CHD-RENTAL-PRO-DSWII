@@ -17,6 +17,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// Pruebas de contratos, incluida la consulta que detecta cruce de fechas para un mismo vehiculo
 @DataJpaTest
 @DisplayName("ContratoRepository - capa de acceso a datos")
 class ContratoRepositoryTest {

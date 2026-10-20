@@ -15,7 +15,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/** Servicio REST de login: usuario y password en BD, password cifrado con BCrypt. */
+// Pruebas del servicio REST de login: credenciales correctas e incorrectas,
+// validaciones y acceso a servicios protegidos sin token o con un token invalido
 @SpringBootTest
 @AutoConfigureMockMvc
 @DisplayName("POST /api/auth/login")

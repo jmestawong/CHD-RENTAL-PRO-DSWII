@@ -6,9 +6,6 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-/**
- * Empresa cliente que alquila las camionetas (mineria, construccion, etc.).
- */
 @Entity
 @Table(name = "clientes")
 @Getter

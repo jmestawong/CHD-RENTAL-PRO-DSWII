@@ -17,10 +17,8 @@ import java.time.LocalDate;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-/**
- * Pruebas de extremo a extremo de los servicios REST (GET, POST, PUT, DELETE)
- * con autenticacion JWT y persistencia real en BD (H2 en modo PostgreSQL).
- */
+// Pruebas completas de los servicios GET, POST, PUT y DELETE: se hace login, se usa el token
+// y se revisa la respuesta HTTP y los datos guardados (base H2 en modo PostgreSQL)
 @SpringBootTest
 @AutoConfigureMockMvc
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)

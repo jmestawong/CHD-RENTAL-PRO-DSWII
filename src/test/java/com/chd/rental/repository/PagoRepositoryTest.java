@@ -15,6 +15,7 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// Pruebas de la capa de acceso a datos de pagos (insertar, actualizar, eliminar y listar)
 @DataJpaTest
 @DisplayName("PagoRepository - capa de acceso a datos")
 class PagoRepositoryTest {

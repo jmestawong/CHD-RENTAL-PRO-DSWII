@@ -85,11 +85,8 @@ public class MantenimientoServiceImpl implements MantenimientoService {
         liberarSiCorresponde(v, id);
     }
 
-    /**
-     * PROGRAMADO / EN_PROCESO: el vehiculo sale de circulacion (MANTENIMIENTO).
-     * COMPLETADO / CANCELADO: el vehiculo se libera si no tiene otro mantenimiento abierto;
-     * al completar se actualiza el kilometraje.
-     */
+    // Mientras el mantenimiento esta PROGRAMADO o EN_PROCESO el vehiculo pasa a MANTENIMIENTO.
+    // Cuando se completa o cancela se libera y, si se completo, se actualiza el kilometraje.
     private void sincronizarVehiculo(Mantenimiento m) {
         Vehiculo v = m.getVehiculo();
         if (ABIERTOS.contains(m.getEstado())) {

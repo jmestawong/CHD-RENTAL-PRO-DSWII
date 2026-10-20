@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.Map;
 
-/** Formato uniforme de error devuelto por todos los servicios. */
 @Data
 @Builder
 @NoArgsConstructor

@@ -18,10 +18,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-/**
- * Lee el encabezado "Authorization: Bearer &lt;token&gt;" y, si el token es valido,
- * registra al usuario autenticado en el SecurityContext.
- */
+// Filtro que revisa el encabezado Authorization: Bearer <token> en cada peticion
+// y, si el token es correcto, deja autenticado al usuario para Spring Security
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {

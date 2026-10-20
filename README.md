@@ -3,6 +3,8 @@
 Proyecto de investigación aplicada del curso **Desarrollo de Servicios Web II (4698)**, CIBERTEC, sexto ciclo, Grupo 10.
 
 Es la API REST para la gestión de alquiler de camionetas 4x4 de **GRUPO CH&D CONTRATISTAS S.A.C.**: clientes, flota, contratos, pagos, mantenimientos y usuarios.
+**Aplicación publicada en Render:** https://chd-rental-api.onrender.com · [Swagger UI](https://chd-rental-api.onrender.com/swagger-ui.html) · [Estado](https://chd-rental-api.onrender.com/actuator/health)
+
 Esta versión 2.0 reemplaza la aplicación JSP/Servlets + MySQL del ciclo anterior por **Spring Boot 3, Spring Data JPA, Lombok, Spring MVC y Spring Security**, con **PostgreSQL** y despliegue en la nube.
 
 | Requisito del curso | Implementación |
@@ -84,7 +86,11 @@ Usuarios iniciales (se crean con BCrypt si la tabla está vacía):
 | pagos@chdrental.com | `Chd12345*` | PAGOS |
 | gerencia@chdrental.com | `Chd12345*` | GERENCIA |
 
-Para probar los servicios: abre `/swagger-ui.html`, ejecuta `POST /api/auth/login`, copia el `token`, presiona **Authorize** y ejecuta el resto. También puedes importar `docs/postman/CHD-Rental-Pro-API.postman_collection.json`; el login guarda el token automáticamente.
+Para probar los servicios: abre `/swagger-ui.html`, ejecuta `POST /api/auth/login`, copia el `token`, presiona **Authorize** y ejecuta el resto. Colecciones Postman en `docs/postman/`:
+- `CHD-Rental-Pro-API.postman_collection.json`: para el entorno local (`baseUrl` = http://localhost:8080).
+- `CHD-Rental-Pro-API-Nube.postman_collection.json`: 35 solicitudes encadenadas contra Render, con validaciones en cada respuesta. Antes de ejecutarla se define la variable `adminPassword`.
+
+En ambas el login guarda el token automáticamente.
 
 ## Pruebas
 

@@ -13,6 +13,7 @@ import java.util.Optional;
 
 public interface ContratoRepository extends JpaRepository<Contrato, Long> {
 
+    // con EntityGraph se traen cliente, vehiculo y usuario en la misma consulta
     @EntityGraph(attributePaths = {"cliente", "vehiculo", "usuario"})
     List<Contrato> findAllByOrderByFechaCreacionDesc();
 
@@ -28,10 +29,8 @@ public interface ContratoRepository extends JpaRepository<Contrato, Long> {
 
     boolean existsByUsuarioId(Long idUsuario);
 
-    /**
-     * Cuenta contratos vigentes (PENDIENTE o ACTIVO) del vehiculo cuyo periodo se cruza
-     * con [inicio, fin]. Se excluye el contrato indicado (util al actualizar).
-     */
+    // Cuenta los contratos PENDIENTE o ACTIVO del vehiculo cuyas fechas se cruzan con las
+    // nuevas. Al actualizar se excluye el mismo contrato para que no choque consigo mismo.
     @Query("""
             SELECT COUNT(c) FROM Contrato c
             WHERE c.vehiculo.id = :idVehiculo

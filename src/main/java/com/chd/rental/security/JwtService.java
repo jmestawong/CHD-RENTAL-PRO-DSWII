@@ -15,9 +15,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Map;
 
-/**
- * Genera y valida tokens JWT (HS256) firmados con la clave definida en {@code app.jwt.secret}.
- */
+// Se encarga de generar el token al hacer login y de validarlo en cada peticion.
+// La clave se lee de app.jwt.secret (en la nube viene de la variable JWT_SECRET).
 @Service
 public class JwtService {
 
@@ -30,10 +29,8 @@ public class JwtService {
         this.expiracionSegundos = expiracionSegundos;
     }
 
-    /**
-     * Usa el secreto en Base64 si es valido y tiene al menos 256 bits; en otro caso
-     * (por ejemplo, un valor generado por la plataforma en la nube) deriva la clave con SHA-256.
-     */
+    // Render genera JWT_SECRET con su propio formato, por eso si no es Base64
+    // valido se obtiene la clave aplicando SHA-256 al texto
     private static byte[] bytesDeClave(String secreto) {
         try {
             byte[] decodificado = Decoders.BASE64.decode(secreto);
@@ -61,7 +58,7 @@ public class JwtService {
                 .compact();
     }
 
-    /** Devuelve el email (subject) si el token es valido y no ha expirado; si no, null. */
+    // Devuelve el email del usuario si el token es valido; si esta vencido o alterado devuelve null
     public String validarYObtenerEmail(String token) {
         try {
             Claims claims = Jwts.parser().verifyWith(clave).build().parseSignedClaims(token).getPayload();
