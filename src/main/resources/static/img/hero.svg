@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="cielo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E1621"/>
+      <stop offset=".55" stop-color="#1B2B3D"/>
+      <stop offset="1" stop-color="#3A3020"/>
+    </linearGradient>
+    <linearGradient id="sol" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F6C453"/>
+      <stop offset="1" stop-color="#E8A317"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1000" fill="url(#cielo)"/>
+  <circle cx="660" cy="300" r="70" fill="url(#sol)" opacity=".9"/>
+  <!-- nevados (Cordillera Blanca) -->
+  <path d="M0 560 L120 420 L190 480 L300 300 L380 400 L470 330 L560 440 L650 360 L760 470 L900 380 V1000 H0Z" fill="#2C3E50"/>
+  <path d="M300 300 L335 345 L318 350 L300 335 L282 352 L268 345Z M470 330 L500 365 L470 360 L445 368Z M650 360 L680 395 L652 392 L628 400Z" fill="#E5E8E8" opacity=".85"/>
+  <path d="M0 640 L160 540 L260 600 L380 520 L520 610 L640 540 L780 620 L900 560 V1000 H0Z" fill="#22313F"/>
+  <!-- camino -->
+  <path d="M0 860 C220 800 420 830 560 780 C690 735 800 750 900 720 V1000 H0Z" fill="#17202A"/>
+  <path d="M0 900 C230 840 430 870 570 820 C700 775 810 790 900 762" stroke="#E8A317" stroke-width="4" stroke-dasharray="26 22" fill="none" opacity=".55"/>
+  <!-- camioneta 4x4 -->
+  <g transform="translate(470 690)">
+    <path d="M0 70 h18 l18 -46 h112 l36 34 h52 q14 0 14 14 v26 H0z" fill="#E8A317"/>
+    <path d="M44 32 h44 v28 H34z M96 32 h44 l26 28 H96z" fill="#17202A" opacity=".8"/>
+    <rect x="-6" y="14" width="150" height="8" rx="3" fill="#0E1621"/>
+    <circle cx="62" cy="98" r="24" fill="#0E1621"/>
+    <circle cx="62" cy="98" r="10" fill="#7F8C8D"/>
+    <circle cx="200" cy="98" r="24" fill="#0E1621"/>
+    <circle cx="200" cy="98" r="10" fill="#7F8C8D"/>
+    <rect x="244" y="72" width="12" height="10" rx="2" fill="#FFF3C4"/>
+  </g>
+</svg>

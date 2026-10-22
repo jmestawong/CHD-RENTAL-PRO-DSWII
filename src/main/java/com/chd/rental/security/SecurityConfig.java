@@ -38,7 +38,7 @@ public class SecurityConfig {
 
     private static final String[] RUTAS_PUBLICAS = {
             "/api/auth/login",
-            "/", "/index.html",
+            "/", "/index.html", "/css/**", "/js/**", "/img/**", "/favicon.svg",
             "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**",
             "/actuator/health", "/actuator/info",
             "/h2-console/**", "/error"
